@@ -84,7 +84,7 @@ source ~/.bashrc
 First we have to create directories for name node and data node.
 ```
 mkdir $PWD/hadoopdata/hdfs/namenode
-mkdir $PWD/hadoop/hdfs/datanode
+mkdir $PWD/hadoopdata/hdfs/datanode
 ```
 Next we should change some files.
 first:
