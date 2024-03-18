@@ -1,6 +1,6 @@
 ## Introduction to Big Data Course Repository
 
-This repository is dedicated to materials related to the Introduction to Big Data course on Coursera. [Link to the course.]
+This repository is dedicated to materials related to the Introduction to Big Data course on Coursera.
 
 ### Course Overview
 
