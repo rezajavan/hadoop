@@ -1,4 +1,4 @@
-rm -r bigdatacoursera/hadoopdata/hdfs/datanode/*
-rm -r bigdatacoursera/hadoopdata/hdfs/namenode/*
+rm -r $PWD/hadoopdata/hdfs/datanode/*
+rm -r $PWD/hadoopdata/hdfs/namenode/*
 hadoop namenode -format
 hadoop datanode -format
