@@ -106,8 +106,16 @@ Ensure all required nodes are running: NodeManager, DataNode, NameNode, Resource
 ```
 jps
 ```
+**Sometimes the NameNode and DataNode fail to start up. If you encounter this issue, stop Hadoop using the method mentioned below.**
+
 ## Stop hadoop
 **to stop hadoop** we should excute `stop-all.sh`, but I recommend first clean datanode and namenode by execute `./removedatnamenode.sh` placed @ `$L/etc`, next execute `stop-all.sh`.
+```
+./removedatnamenode.sh
+```
+```
+stop-all.sh
+```
 
 # Course Practices
 ## Word Count Task
@@ -115,8 +123,8 @@ jps
 hdfs dfs -mkdir /test
 hdfs dfs -put $L/etc/words.txt /test/
 hadoop jar $L/etc/hadoop-mapreduce-examples-3.3.6.jar wordcount /test/words.txt /test/result1
-hdfs dfs -ls /test/result
-hdfs dfs -cat /test/result/part*
+hdfs dfs -ls /test/result1
+hdfs dfs -cat /test/result1/part*
 ```
 ## exam 
 Wordcount and wordmediation
@@ -131,11 +139,14 @@ Wordcount and wordmediation
    ```
 3. **Review the output and search for the specific word 'Cheshire' that we are interested in.** 
    ```
-   hdfs dfs -cat /test/resul2/part* | grep "Cheshire"
+   hdfs dfs -cat /test/result2/part* | grep "Cheshire"
    ```
+   **You will encounter instances of both 'Cheshire' and '"Cheshire' in the output. The number preceding 'Cheshire' indicates our success in passing the exam.**
+
 4. **word median:**
    ```
-   hadoop jar $L/etc/hadoop-mapreduce-examples-3.3.6.jar wordmedian /test/11-0.txt /test/result2
+   hdfs dfs -rm -r /test/result3
+   hadoop jar $L/etc/hadoop-mapreduce-examples-3.3.6.jar wordmedian /test/11-0.txt /test/result3
    ```
 If you encounter any issues or need further assistance, feel free to reach out.
 
