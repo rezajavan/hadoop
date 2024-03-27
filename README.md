@@ -26,6 +26,7 @@ java -version
 sudo adduser hadoopuser
 ```
 **Incorporating the `hadoopuser` name is crucial as certain configuration files rely on it.**
+
 2. **Install SSH:** 
 ```
 sudo apt install ssh
