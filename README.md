@@ -22,12 +22,18 @@ java -version
 ### Setup Instructions
 
 1. **Create a New User:** 
-```sudo adduser hadoopuser```.
-**Incorporating the 'hadoopuser' name is crucial as certain configuration files rely on it.**
+```
+sudo adduser hadoopuser
+```
+**Incorporating the `hadoopuser` name is crucial as certain configuration files rely on it.**
 2. **Install SSH:** 
-```sudo apt install ssh```
+```
+sudo apt install ssh
+```
 3. **Install Net-tools (Optional):** 
-```sudo apt install net-tools```
+```
+sudo apt install net-tools
+```
 **note: from step 4. to forward you have to be in the hadoopuser.**
 
 4. **Generate SSH Keys:** 
@@ -108,8 +114,8 @@ Ensure all required nodes are running: NodeManager, DataNode, NameNode, Resource
 ```
 jps
 ```
-### Stop hadoop
-**to stop hadoop we should excute `stop-all.sh`, but I recommend first clean datanode and namenode by execute `./removedatnamenode.sh` placed @ `$L/etc`, next execute `stop-all.sh`.
+## Stop hadoop
+**to stop hadoop** we should excute `stop-all.sh`, but I recommend first clean datanode and namenode by execute `./removedatnamenode.sh` placed @ `$L/etc`, next execute `stop-all.sh`.
 
 # Course Practices
 ## Word Count Task
