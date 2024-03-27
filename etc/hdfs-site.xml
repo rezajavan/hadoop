@@ -23,11 +23,11 @@
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:///home/hadoopuser/bigdatacoursera/hadoopdata/hdfs/namenode</value>
+        <value>file:///home/hadoopuser/hadoop/hadoopdata/hdfs/namenode</value>
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///home/hadoopuser/bigdatacoursera/hadoopdata/hdfs/datanode</value>
+        <value>file:///home/hadoopuser/hadoop/hadoopdata/hdfs/datanode</value>
     </property>
-
 </configuration>
+

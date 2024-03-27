@@ -21,10 +21,15 @@ java -version
 
 ### Setup Instructions
 
-1. **Create a New User:** `sudo adduser hadoopuser`.
-2. **Install SSH:** `sudo apt install ssh`
-3. **Install Net-tools (Optional):** `sudo apt install net-tools`
-`note: from step 4. to forward you have to be in the hadoopuser.` 
+1. **Create a New User:** 
+```sudo adduser hadoopuser```.
+**Incorporating the 'hadoopuser' name is crucial as certain configuration files rely on it.**
+2. **Install SSH:** 
+```sudo apt install ssh```
+3. **Install Net-tools (Optional):** 
+```sudo apt install net-tools```
+**note: from step 4. to forward you have to be in the hadoopuser.**
+
 4. **Generate SSH Keys:** 
 Loggin to hadoopuser:
    ```
@@ -44,14 +49,14 @@ cd hadoop
 ```
 We need the file address
 ```
-PWD=$(pwd)
+L=$(pwd)
 ```
 ### Download and install hadoop
 
 Download hadoop 
 
 ```
-cd PWD
+cd L
 wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz
 ```
 then,
@@ -60,12 +65,12 @@ tar -xvf hadoop-3.3.6.tar.gz
 
 ```
 
-**Update Bashrc: Open ~/.bashrc and append the following lines:**
+**Update Bashrc: Open ~/.bashrc and append the following lines:** `nano ~/.bashrc`
 ```
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
 
-export HADOOP_HOME=$HOME/bigdatacoursera/hadoop-3.3.6  # note: this directory is different for you which is: $PWD/hadoop-3.3.6 (Execute ` echo $PWD` to see the address)
+export HADOOP_HOME=$HOME/hadoop/hadoop-3.3.6
 export HADOOP_INSTALL=$HADOOP_HOME
 export HADOOP_MAPRED_HOME=$HADOOP_HOME
 export HADOOP_COMMON_HOME=$HADOOP_HOME
@@ -83,37 +88,14 @@ source ~/.bashrc
 **Configure HDFS:**
 First we have to create directories for name node and data node.
 ```
-mkdir $PWD/hadoopdata/hdfs/namenode
-mkdir $PWD/hadoopdata/hdfs/datanode
-```
-Next we should change some files.
-first:
-```
-nano $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+mkdir -p $L/hadoopdata/hdfs/namenode
+mkdir -p $L/hadoopdata/hdfs/datanode
 ```
 
-Add the following configuration:
+merge configs:
 
 ```
-<configuration>
-    <property>
-        <name>dfs.replication</name>
-        <value>1</value>
-    </property>
-    <property>
-        <name>dfs.namenode.name.dir</name>
-        <value>file:///home/hadoopuser/bigdatacoursera/hadoopdata/hdfs/namenode</value> # like above, the address is different for you, address is $PWD/hadoopdata/hdfs/namenode
-    </property>
-    <property>
-        <name>dfs.datanode.data.dir</name>
-        <value>file:///home/hadoopuser/bigdatacoursera/hadoopdata/hdfs/datanode</value> #$PWD/hadoopdata/hdfs/datanode
-    </property>
-</configuration>
-```
-merge remain configs:
-
-```
-cd $PWD/etc
+cd $L/etc
 ./merge.sh
 ```
 
@@ -126,12 +108,15 @@ Ensure all required nodes are running: NodeManager, DataNode, NameNode, Resource
 ```
 jps
 ```
+### Stop hadoop
+**to stop hadoop we should excute `stop-all.sh`, but I recommend first clean datanode and namenode by execute `./removedatnamenode.sh` placed @ `$L/etc`, next execute `stop-all.sh`.
+
 # Course Practices
 ## Word Count Task
 ```
 hdfs dfs -mkdir /test
-hdfs dfs -put $PWD/etc/words.txt /test/
-hadoop jar $PWD/etc/hadoop-mapreduce-examples-3.3.6.jar wordcount /test/words.txt /test/result1
+hdfs dfs -put $L/etc/words.txt /test/
+hadoop jar $L/etc/hadoop-mapreduce-examples-3.3.6.jar wordcount /test/words.txt /test/result1
 hdfs dfs -ls /test/result
 hdfs dfs -cat /test/result/part*
 ```
@@ -140,11 +125,11 @@ Wordcount and wordmediation
 
 1. **Prepare Data:**
    ```
-   hdfs dfs -put $PWD/etc/11-0.txt /test
+   hdfs dfs -put $L/etc/11-0.txt /test
    ```
 2. **Word Count:**
    ```
-   hadoop jar $PWD/etc/hadoop-mapreduce-examples-3.3.6.jar wordcount /test/11-0.txt /test/result2
+   hadoop jar $L/etc/hadoop-mapreduce-examples-3.3.6.jar wordcount /test/11-0.txt /test/result2
    ```
 3. **Review the output and search for the specific word 'Cheshire' that we are interested in.** 
    ```
@@ -152,7 +137,7 @@ Wordcount and wordmediation
    ```
 4. **word median:**
    ```
-   hadoop jar $PWD/etc/hadoop-mapreduce-examples-3.3.6.jar wordmedian /test/11-0.txt /test/result2
+   hadoop jar $L/etc/hadoop-mapreduce-examples-3.3.6.jar wordmedian /test/11-0.txt /test/result2
    ```
 If you encounter any issues or need further assistance, feel free to reach out.
 
